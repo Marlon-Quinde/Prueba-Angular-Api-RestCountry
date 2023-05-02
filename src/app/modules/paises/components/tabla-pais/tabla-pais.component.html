@@ -1,0 +1,47 @@
+<div *ngIf="loading" class="card">
+  <div class="flex">
+    <div class="flex align-items-center justify-content-center w-12">
+      <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+    </div>
+  </div>
+  <div class="flex align-items-center justify-content-center w-12">
+    <h2 class="text-center">Cargando...</h2>
+  </div>
+
+</div>
+
+<div *ngIf="!loading" class="card">
+
+  <p-table [value]="paises" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nro</th>
+            <th>Codigo</th>
+            <th>Pais</th>
+            <th>Capital</th>
+            <th>Zona horaria</th>
+            <th *ngIf="favorito">Favorito</th>
+            <th *ngIf="eliminar">Eliminar</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pais let-rowIndex="rowIndex">
+        <tr>
+            <td> {{rowIndex + 1}} </td>
+            <td>{{ pais.cca2 }}</td>
+            <td>{{ pais.name.common }}</td>
+            <td> {{pais.capital }} </td>
+            <td>{{ pais.timezones }}</td>
+            <td *ngIf="favorito">
+              <button pButton icon="pi pi-star"
+                      class="p-button-rounded p-button-warning p-button-text"
+                      (click)="guardarFavorito(pais)"></button>
+            </td>
+            <td *ngIf="eliminar">
+              <button pButton icon="pi pi-trash"
+                      class="p-button-rounded p-button-danger p-button-text"
+                      (click)="eliminarFavorito(pais)"></button>
+            </td>
+        </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,54 @@
+<p-toast></p-toast>
+<div class="flex h-full">
+  <div class="flex align-items-center justify-content-center w-full">
+    <div class="w-10 sm:w-8 md:w-6 lg:w-4">
+
+      <mat-card>
+        <mat-card-header class="w-full">
+          <div class="block w-full">
+
+            <h2 class="text-center w-full text-primary"> Iniciar sesion </h2>
+            <h3 class="text-center w-full text-700"> Ingresa tus credenciales </h3>
+
+          </div>
+
+        </mat-card-header>
+        <mat-card-content>
+
+          <form [formGroup]="myForm" autocomplete="off">
+            <div class="m-3">
+              <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Usuario</mat-label>
+                <input matInput formControlName="usuario" required>
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-hint>Escribe tu usuario</mat-hint>
+                <mat-error *ngIf="isValidField('usuario')">El usuario es requerido</mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <div class="m-3">
+
+              <mat-form-field class="w-full" appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" required>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-hint>Ingresa tu contraseña</mat-hint>
+                <mat-error *ngIf="isValidField('password')">La contraseña es requerida</mat-error>
+              </mat-form-field>
+            </div>
+
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="w-full" color="primary" mat-raised-button (click)="login()">Login</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+  </div>
+
+</div>
+
